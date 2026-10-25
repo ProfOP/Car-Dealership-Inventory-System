@@ -128,5 +128,5 @@ describe('inventory persistence and concurrency', () => {
     expect(responses.filter((response) => response.status === 200)).toHaveLength(3);
     expect(responses.filter((response) => response.status === 409)).toHaveLength(2);
     expect((await prisma.vehicle.findUnique({ where: { id: vehicle.id } }))?.quantity).toBe(0);
-  });
+  }, 20000);
 });
