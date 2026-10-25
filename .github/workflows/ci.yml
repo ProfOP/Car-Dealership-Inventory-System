@@ -32,7 +32,7 @@ jobs:
         run: npm run build
       - name: Backend coverage
         working-directory: backend
-        run: npm run test:coverage -- --pool=forks --poolOptions.forks.singleFork
+        run: npm run test:coverage
       - name: Backend integration and concurrency
         working-directory: backend
         run: npm run test:integration
