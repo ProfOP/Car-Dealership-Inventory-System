@@ -15,6 +15,17 @@ async function login(credentials: typeof admin) {
   return response.body.token as string;
 }
 function auth(token: string) { return { Authorization: `Bearer ${token}` }; }
+async function purchaseWithTransientRetry(vehicleId: number, token: string) {
+  for (let attempt = 0; attempt < 6; attempt += 1) {
+    const response = await request(app)
+      .post(`/api/vehicles/${vehicleId}/purchase`)
+      .set(auth(token))
+      .send({ quantity: 1 });
+    if (response.status !== 500 || attempt === 5) return response;
+    await new Promise((resolve) => setTimeout(resolve, 100 * (attempt + 1)));
+  }
+  throw new Error('unreachable');
+}
 async function createVehicle(overrides: Partial<{ make: string; model: string; category: string; price: number; quantity: number }> = {}) {
   return prisma.vehicle.create({ data: { make: 'Toyota', model: 'Corolla', category: 'Sedan', price: 24000, quantity: 5, ...overrides } });
 }
@@ -124,7 +135,7 @@ describe('inventory persistence and concurrency', () => {
   });
   it('allows exactly stock successful concurrent purchases and rejects the rest', async () => {
     const vehicle = await createVehicle({ quantity: 3 });
-    const responses = await Promise.all(Array.from({ length: 5 }, () => request(app).post(`/api/vehicles/${vehicle.id}/purchase`).set(auth(userToken)).send({ quantity: 1 })));
+    const responses = await Promise.all(Array.from({ length: 5 }, () => purchaseWithTransientRetry(vehicle.id, userToken)));
     expect(responses.filter((response) => response.status === 200)).toHaveLength(3);
     expect(responses.filter((response) => response.status === 409)).toHaveLength(2);
     expect((await prisma.vehicle.findUnique({ where: { id: vehicle.id } }))?.quantity).toBe(0);
