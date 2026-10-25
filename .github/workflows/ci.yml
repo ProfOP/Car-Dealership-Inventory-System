@@ -27,12 +27,15 @@ jobs:
           npx prisma generate
           npx prisma migrate deploy
           npm run prisma:seed
-      - name: Backend validation
+      - name: Backend build
         working-directory: backend
-        run: |
-          npm run build
-          npm run test:coverage
-          npm run test:integration
+        run: npm run build
+      - name: Backend coverage
+        working-directory: backend
+        run: npm run test:coverage
+      - name: Backend integration and concurrency
+        working-directory: backend
+        run: npm run test:integration
       - name: Frontend install and validation
         working-directory: frontend
         run: |
