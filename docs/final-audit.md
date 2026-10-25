@@ -14,12 +14,13 @@ The project is ready with minor limitations. Core API, persistence, authenticati
 - Fixed Admin seed behavior so rerunning seed refreshes the configured password hash.
 - Added CI workflow, requirements matrix, screenshot references, and this audit report.
 - Added a Windows-local SQLite bootstrap that executes the checked-in migration directly; Linux/CI continues to use `prisma migrate deploy`.
+- Applied safe dependency updates: frontend production audit is clean, and Vitest tooling advisories are resolved.
 
 ## Test results
 
 | Category | Passed | Failed | Skipped | Status |
 |---|---:|---:|---:|---|
-| Backend unit/security | 3 | 0 | 0 | PASS |
+| Backend unit/security | 14 | 0 | 0 | PASS |
 | Backend integration/concurrency | 11 | 0 | 0 | PASS |
 | Frontend Vitest | 44 | 0 | 0 | PASS |
 | Browser E2E | 6 | 0 | 0 | PASS |
@@ -29,11 +30,11 @@ The project is ready with minor limitations. Core API, persistence, authenticati
 
 ## Coverage
 
-The executed backend coverage run included all unit and integration tests and excluded generated output, seed/bootstrap scripts, server entrypoint, type declarations, and test/config files: 100% statements, 89.47% branches, 96.29% functions, and 100% lines for application source.
+The executed backend coverage run included all unit and integration tests and excluded generated output, seed/bootstrap scripts, server entrypoint, type declarations, and test/config files: 95.07% statements, 86% branches, 95% functions, and 100% lines for application source.
 
 ## Security findings
 
-Passwords are bcrypt-hashed, JWT secrets are environment-configured, Admin registration escalation is blocked, malformed IDs and request bodies are validated, and error responses do not expose stack traces. The backend audit reports 7 advisories total: 3 high Prisma CLI/config advisories and 4 development-tool advisories through Vitest. `npm audit --omit=dev --audit-level=high` still reports the 3 Prisma-chain highs in the lock tree; the suggested remediation is Prisma 7.10.1, a major upgrade. A safe Vitest 4 update was attempted but npm failed with `Cannot read properties of null (reading 'edgesOut')` before changing package files, so no unvalidated dependency change was retained. The Prisma CLI and Vitest findings are development/test tooling; the application server imports `@prisma/client`, not the Prisma CLI or Vitest APIs.
+Passwords are bcrypt-hashed, JWT secrets are environment-configured, Admin registration escalation is blocked, malformed IDs and request bodies are validated, and error responses do not expose stack traces. The frontend audit reports 0 vulnerabilities after safe updates to Axios, React Router, and Vite. The backend audit reports 3 remaining high Prisma CLI/config advisories through `prisma@6.19.3` and `@prisma/config`/`deepmerge-ts`; the suggested remediation is Prisma 7.10.1, a major upgrade requiring a separately tested migration. Vitest advisories were resolved with Vitest 4.1.12 and coverage-v8 4.1.12. The remaining Prisma findings are development tooling; the application server imports `@prisma/client`, not the Prisma CLI or Vitest APIs.
 
 ## CI/CD
 
@@ -41,7 +42,7 @@ The GitHub Actions workflow uses `npm ci`, Prisma generation, migration deployme
 
 ## Fresh-clone verification
 
-A temporary checkout from commit `c7b3296` was created without inherited `.env`, databases, `node_modules`, or build artifacts. Fresh backend/frontend `npm ci`, Prisma generation, Windows migration bootstrap, seed, backend build, 14 backend tests, 11 integration tests, frontend 44 tests, lint, build, and 6 Playwright tests all passed. The temporary checkout was removed afterward.
+A temporary checkout from the final dependency state was created without inherited `.env`, databases, `node_modules`, or build artifacts. Fresh backend/frontend `npm ci`, Prisma generation, Windows migration bootstrap, seed, backend build, 14 backend tests, 11 integration tests, frontend 44 tests, lint, build, and 6 Playwright tests all passed. The temporary checkout was removed afterward.
 
 ## Screenshot validation
 

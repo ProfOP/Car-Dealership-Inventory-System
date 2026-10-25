@@ -15,8 +15,8 @@ Status is based only on checks executed in this repository.
 | Purchase and stock protection | Conditional atomic SQL decrement | Sequential and concurrent database tests | PASS |
 | Admin restock | Protected positive quantity increment | Persistence and authorization integration tests | PASS |
 | Browser E2E | Playwright desktop + mobile Chromium projects | 6 tests passed | PASS |
-| Coverage reporting | Vitest V8 coverage script | 100% statements, 89.47% branches, 96.29% functions, 100% lines for application source | PASS |
+| Coverage reporting | Vitest V8 coverage script | 95.07% statements, 86% branches, 95% functions, 100% lines for application source | PASS |
 | Fresh-clone reproducibility | Clean Git checkout with no local state | Setup, seed, build, tests, and E2E all passed | PASS |
 | CI workflow | `.github/workflows/ci.yml` | Equivalent commands passed locally; remote run pending | PARTIAL |
 | TDD evidence | Audit defect test failed, fix passed, commits preserved | `5944f4d` then `b21a72d`; earlier history is not a full TDD trace | PARTIAL |
-| Production security audit | npm audit and source review | 3 high Prisma-chain advisories remain; dev-tool advisories also reported | PARTIAL |
+| Production security audit | npm audit and source review | Frontend audit clean; 3 high Prisma-chain development-tool advisories remain in backend Prisma 6.19.3 | PARTIAL |

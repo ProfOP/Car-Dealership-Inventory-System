@@ -16,9 +16,9 @@ This report is maintained from commands actually executed during development on 
 | Suite/check | Result |
 |---|---|
 | Backend `npm run build` | Passed |
-| Backend `npm test` | 2 test files, 3 tests passed, 0 failed |
+| Backend `npm test` | 3 test files, 14 tests passed, 0 failed |
 | Backend `npm run test:integration` | 1 file, 11 tests passed, 0 failed; separate database and migration reset |
-| Backend `npm run test:coverage` | 14 tests passed; 100% statements, 89.47% branches, 96.29% functions, 100% lines for application source |
+| Backend `npm run test:coverage` | 14 tests passed; 95.07% statements, 86% branches, 95% functions, 100% lines for application source |
 | Frontend `npm test` | 8 test files, 44 tests passed, 0 failed |
 | Frontend `npm run lint` | Passed with 0 errors |
 | Frontend `npm run build` | Passed; Vite produced `dist/` |
@@ -31,4 +31,4 @@ This report is maintained from commands actually executed during development on 
 
 ## Coverage and limitations
 
-The backend `npm audit` reports 7 advisories total: 3 high Prisma CLI/config advisories and 4 development-tool advisories through Vitest. `npm audit --omit=dev --audit-level=high` still reports the 3 Prisma-chain highs; the suggested fix is a breaking Prisma 7 upgrade. A Vitest 4 update attempt failed inside npm before changing files, so no unvalidated dependency upgrade was retained. See [final-audit.md](final-audit.md) and [requirements-compliance.md](requirements-compliance.md).
+The frontend audit reports 0 vulnerabilities after safe dependency updates. The backend audit reports 3 remaining high Prisma CLI/config advisories through Prisma 6.19.3; the suggested fix is a breaking Prisma 7 upgrade. Vitest advisories were resolved with Vitest 4.1.12 and coverage-v8 4.1.12. See [final-audit.md](final-audit.md) and [requirements-compliance.md](requirements-compliance.md).
