@@ -8,7 +8,7 @@ import {
   HiOutlineCog,
   HiOutlineStar,
 } from 'react-icons/hi';
-import { RiCarLine, RiGasStationLine, RiSpeedLine, RiVipCrownLine, RiTruckLine } from 'react-icons/ri';
+import { RiCarLine, RiSpeedLine, RiVipCrownLine, RiTruckLine } from 'react-icons/ri';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -468,7 +468,7 @@ function FeatureCard({ icon: Icon, title, description, color }) {
   );
 }
 
-function ShowcaseCard({ icon: Icon, title, count, description, gradient, delay }) {
+function ShowcaseCard({ icon: Icon, title, count, description, gradient }) {
   return (
     <motion.div
       variants={cardUp}

@@ -7,4 +7,4 @@ class MockIntersectionObserver {
   disconnect() { return null; }
 }
 window.IntersectionObserver = MockIntersectionObserver;
-global.IntersectionObserver = MockIntersectionObserver;
+globalThis.IntersectionObserver = MockIntersectionObserver;

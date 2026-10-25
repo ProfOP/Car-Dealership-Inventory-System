@@ -15,6 +15,7 @@ This report is maintained from commands actually executed during development on 
 | Backend `npm run build` | Passed |
 | Backend `npm test` | 2 test files, 3 tests passed, 0 failed |
 | Frontend `npm test` | 8 test files, 44 tests passed, 0 failed |
+| Frontend `npm run lint` | Passed with 0 errors |
 | Frontend `npm run build` | Passed; Vite produced `dist/` |
 | Prisma migration/reset + seed | Passed; 1 migration applied and 6 vehicles seeded |
 | Live API smoke check | Passed: `/health`, Admin login, authenticated vehicle listing |
