@@ -1,5 +1,6 @@
 import { HiOutlineShoppingCart, HiOutlineTag } from 'react-icons/hi';
 import { RiGasStationLine } from 'react-icons/ri';
+import { formatINR } from '../utils/currency';
 
 export default function VehicleCard({ vehicle, onPurchase, purchaseLoading }) {
   const outOfStock = vehicle.quantity <= 0;
@@ -24,7 +25,7 @@ export default function VehicleCard({ vehicle, onPurchase, purchaseLoading }) {
       <div className="vehicle-card-footer">
         <div className="vehicle-price">
           <HiOutlineTag className="price-icon" />
-          <span>₹{vehicle.price.toLocaleString()}</span>
+          <span>{formatINR(vehicle.price)}</span>
         </div>
 
         <button

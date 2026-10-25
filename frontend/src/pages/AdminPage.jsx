@@ -13,6 +13,7 @@ import {
   HiOutlineSearch,
 } from 'react-icons/hi';
 import { RiCarLine } from 'react-icons/ri';
+import { formatINR, formatIndianNumber } from '../utils/currency';
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -247,7 +248,7 @@ export default function AdminPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium text-gray-900">{v.make} {v.model}</p>
-                    <p className="text-xs text-gray-500">{v.category} &middot; ₹{v.price.toLocaleString()}</p>
+                    <p className="text-xs text-gray-500">{v.category} &middot; {formatINR(v.price)}</p>
                   </div>
                 </div>
                 <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${v.quantity <= 0 ? 'bg-red-50 text-red-600' : v.quantity <= 3 ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'}`}>
@@ -345,7 +346,7 @@ function AnimatedNumber({ value, prefix = '' }) {
     requestAnimationFrame(step);
   }, [value]);
 
-  return <>{prefix}{display.toLocaleString()}</>;
+  return <>{prefix}{formatIndianNumber(display)}</>;
 }
 
 function StatCard({ icon: Icon, label, value, color, prefix = '' }) {
@@ -390,7 +391,7 @@ function VehicleRow({ vehicle, onEdit, onDelete, onRestock }) {
       <td className="px-6 py-3.5">
         <span className="text-xs font-medium text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">{v.category}</span>
       </td>
-      <td className="px-6 py-3.5 text-right font-medium text-gray-900">₹{v.price.toLocaleString()}</td>
+      <td className="px-6 py-3.5 text-right font-medium text-gray-900">{formatINR(v.price)}</td>
       <td className="px-6 py-3.5 text-right">
         <span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${v.quantity <= 0 ? 'bg-red-50 text-red-600' : v.quantity <= 3 ? 'bg-amber-50 text-amber-600' : 'bg-emerald-50 text-emerald-600'}`}>
           {v.quantity}

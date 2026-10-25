@@ -8,7 +8,8 @@ The project is ready with minor limitations. Core API, persistence, authenticati
 
 - Added 11 database-backed integration/concurrency tests using a separate `integration.db` and the checked-in Prisma migration.
 - Added coverage reporting with Vitest V8.
-- Added six Playwright tests across desktop and mobile Chromium projects.
+- Added eight Playwright tests across desktop and mobile Chromium projects, including seeded inventory, INR formatting, filtering, and out-of-stock UI verification.
+- Added 15 idempotent demonstration vehicles without changing the existing Toyota Corolla record.
 - Fixed SQLite search portability and malformed vehicle ID handling.
 - Fixed Axios login 401 handling so invalid credentials remain visible to the user.
 - Fixed Admin seed behavior so rerunning seed refreshes the configured password hash.
@@ -20,10 +21,10 @@ The project is ready with minor limitations. Core API, persistence, authenticati
 
 | Category | Passed | Failed | Skipped | Status |
 |---|---:|---:|---:|---|
-| Backend unit/security | 14 | 0 | 0 | PASS |
+| Backend unit/security | 15 | 0 | 0 | PASS |
 | Backend integration/concurrency | 11 | 0 | 0 | PASS |
-| Frontend Vitest | 44 | 0 | 0 | PASS |
-| Browser E2E | 6 | 0 | 0 | PASS |
+| Frontend Vitest | 45 | 0 | 0 | PASS |
+| Browser E2E | 8 | 0 | 0 | PASS |
 | Backend build | 1 | 0 | 0 | PASS |
 | Frontend build | 1 | 0 | 0 | PASS |
 | Frontend lint | 1 | 0 | 0 | PASS |
@@ -42,7 +43,7 @@ The GitHub Actions workflow uses `npm ci`, Prisma generation, migration deployme
 
 ## Fresh-clone verification
 
-A temporary checkout from the final dependency state was created without inherited `.env`, databases, `node_modules`, or build artifacts. Fresh backend/frontend `npm ci`, Prisma generation, Windows migration bootstrap, seed, backend build, 14 backend tests, 11 integration tests, frontend 44 tests, lint, build, and 6 Playwright tests all passed. The temporary checkout was removed afterward.
+A temporary checkout from the final dependency state was created without inherited `.env`, databases, `node_modules`, or build artifacts. Fresh backend/frontend `npm ci`, Prisma generation, Windows migration bootstrap, seed, backend build, 14 backend tests, 11 integration tests, frontend 44 tests, lint, build, and 6 Playwright tests all passed. The temporary checkout was removed afterward. The current populated development database was then verified separately with 16 vehicles and an idempotent second seed run.
 
 ## Screenshot validation
 

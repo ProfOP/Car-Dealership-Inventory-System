@@ -7,6 +7,7 @@ import { HiOutlineShoppingCart, HiOutlineTag, HiOutlinePlus, HiOutlinePencilAlt 
 import { RiCarLine, RiGasStationLine } from 'react-icons/ri';
 import SearchBar from '../components/SearchBar';
 import VehicleForm from '../components/VehicleForm';
+import { formatINR } from '../utils/currency';
 
 const stagger = {
   hidden: { opacity: 0 },
@@ -234,7 +235,7 @@ function VehicleCard({ vehicle, onPurchase, purchaseLoading, onEdit }) {
 
         <div className="flex items-center gap-1.5 mt-4 text-gray-900 font-semibold">
           <HiOutlineTag className="w-4 h-4 text-gray-400" />
-          ₹{vehicle.price.toLocaleString()}
+          {formatINR(vehicle.price)}
         </div>
       </div>
 

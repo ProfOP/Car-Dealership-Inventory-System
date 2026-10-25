@@ -16,15 +16,15 @@ This report is maintained from commands actually executed during development on 
 | Suite/check | Result |
 |---|---|
 | Backend `npm run build` | Passed |
-| Backend `npm test` | 3 test files, 14 tests passed, 0 failed |
+| Backend `npm test` | 4 test files, 15 tests passed, 0 failed |
 | Backend `npm run test:integration` | 1 file, 11 tests passed, 0 failed; separate database and migration reset |
-| Backend `npm run test:coverage` | 14 tests passed; 95.07% statements, 86% branches, 95% functions, 100% lines for application source |
-| Frontend `npm test` | 8 test files, 44 tests passed, 0 failed |
+| Backend `npm run test:coverage` | 15 tests passed; 95.07% statements, 86% branches, 95% functions, 100% lines for application source |
+| Frontend `npm test` | 9 test files, 45 tests passed, 0 failed |
 | Frontend `npm run lint` | Passed with 0 errors |
 | Frontend `npm run build` | Passed; Vite produced `dist/` |
-| Frontend `npm run test:e2e` | 6 tests passed across Chromium desktop and mobile projects |
-| Prisma migration/reset + seed | Passed; 1 migration applied and 6 vehicles seeded |
-| Live API smoke check | Passed: `/health`, Admin login, authenticated vehicle listing |
+| Frontend `npm run test:e2e` | 8 tests passed across Chromium desktop and mobile projects, including populated inventory and INR/out-of-stock checks |
+| Prisma migration/reset + seed | Passed; existing Corolla preserved, 15 demo vehicles added, second seed added 0 duplicates |
+| Live API/UI smoke check | Passed: Admin login/dashboard, populated inventory, INR display, make filter, and disabled out-of-stock purchase state |
 | Fresh Git checkout | Passed; clean install, setup, seed, build, tests, integration, and E2E verified |
 | Screenshot validation | Passed; all 5 README-referenced files exist |
 | CI workflow | Locally validated; remote GitHub execution pending |

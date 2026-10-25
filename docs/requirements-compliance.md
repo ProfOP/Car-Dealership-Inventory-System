@@ -5,7 +5,7 @@ Status is based only on checks executed in this repository.
 | Requirement | Implementation | Test evidence | Status |
 |---|---|---|---|
 | Separate sibling project | `D:\car-dealership-inventory` with its own `.git` | Git history and clean repository | PASS |
-| Preserved React frontend | Copied React/Vite/Tailwind pages, components, assets | 44 Vitest tests, lint, build, Playwright | PASS |
+| Preserved React frontend | Copied React/Vite/Tailwind pages, components, assets | 45 Vitest tests, lint, build, Playwright | PASS |
 | Persistent database | Prisma SQLite schema and migration | Migration, seed, persisted integration assertions | PASS |
 | User registration | `/api/auth/register`, Zod, bcrypt, default USER | Integration registration/duplicate/validation tests | PASS |
 | JWT login and verification | `/api/auth/login`, JWT middleware | Login, malformed, invalid, expired token tests | PASS |
@@ -14,7 +14,7 @@ Status is based only on checks executed in this repository.
 | Combined vehicle search | Make/model/category/min/max filters | Search integration tests | PASS |
 | Purchase and stock protection | Conditional atomic SQL decrement | Sequential and concurrent database tests | PASS |
 | Admin restock | Protected positive quantity increment | Persistence and authorization integration tests | PASS |
-| Browser E2E | Playwright desktop + mobile Chromium projects | 6 tests passed | PASS |
+| Browser E2E | Playwright desktop + mobile Chromium projects | 8 tests passed, including seeded inventory and INR UI checks | PASS |
 | Coverage reporting | Vitest V8 coverage script | 95.07% statements, 86% branches, 95% functions, 100% lines for application source | PASS |
 | Fresh-clone reproducibility | Clean Git checkout with no local state | Setup, seed, build, tests, and E2E all passed | PASS |
 | CI workflow | `.github/workflows/ci.yml` | Equivalent commands passed locally; remote run pending | PARTIAL |
