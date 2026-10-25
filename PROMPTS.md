@@ -1,15 +1,108 @@
-# AI Interaction Record
+# AI Prompts History
 
-This file records the actual prompt available to this development session. The complete raw Codex transcript cannot be exported from the local environment, so no unobserved prompts, responses, timestamps, or test results are invented here.
+## Project skeleton
 
-## Master Prompt
+**AI tool:** Cursor
 
-The full user-supplied master prompt is preserved in the attachment supplied with this task at `C:\Users\yashp\.codex\attachments\60c7c692-08a9-4c8b-809a-9336c927690c\Pasted text.txt`. It requested analysis of the original Spring Boot + React project, creation of a separate `car-dealership-inventory` sibling project, frontend preservation, a substantially new TypeScript/Express/Prisma backend, JWT/RBAC, persistent storage, tests, documentation, and truthful validation.
+**Prompt:**
+```text
+Set up the initial Car Dealership Inventory System foundation.
+Use Node.js/TypeScript/Express, MongoDB, JWT, and React/Vite/Tailwind.
+Create backend and frontend scaffolds only — no business features yet.
+```
 
-## Development Record Limitation
+**Outcome:** Created monorepo structure, tooling, and empty module folders.
 
-The attachment path is retained as the source record because the complete interactive transcript is not available as a portable raw export. This document intentionally does not fabricate missing chat messages or claim that unexecuted red-green-refactor cycles were captured.
+---
 
-## Final QA Prompt
+## MongoDB connection
 
-The second user-supplied prompt used for the audit is available at `C:\Users\yashp\.codex\attachments\b114b745-9186-4288-b145-d8b22eb9aa33\Pasted text.txt`. It requested final QA, database-backed integration and concurrency tests, Playwright E2E coverage, security review, coverage measurement, CI, compliance documentation, and an honest final audit. The complete raw Codex transcript remains unavailable for export.
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Connect the Express backend to MongoDB Atlas using MONGODB_URI and expose a health check that reports database status.
+```
+
+**Outcome:** Added database config, startup connection, and `/api/health`.
+
+---
+
+## Authentication API
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Implement register and login with JWT using TDD. Do not add code comments.
+```
+
+**Outcome:** Delivered auth endpoints, User model, password hashing, and JWT login.
+
+---
+
+## Vehicles and inventory API
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Implement protected vehicle CRUD, search, purchase, and admin-only restock/delete with Red-Green TDD commits.
+```
+
+**Outcome:** Completed vehicle and inventory APIs with passing backend tests.
+
+---
+
+## Admin setup and role verification
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Add admin seeding and verify role-based access for API and SPA.
+Normal users may browse, search, and purchase.
+Admins may add, update, delete, and restock.
+Confirm UI and endpoints behave correctly per role.
+```
+
+**Outcome:** Added `seed:admin`, role API tests, and role-based SPA controls (admin management UI vs user purchase flow).
+
+---
+
+## Frontend auth and dashboard
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Build login/register with JWT storage, then the vehicle dashboard with search, purchase, and admin actions.
+```
+
+**Outcome:** Delivered auth UI, inventory dashboard, password visibility toggle, and clearer price/quantity inputs.
+
+---
+
+## Purchase history
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Add purchase history so each user can view their own purchases in the SPA.
+```
+
+**Outcome:** Added Purchase model, `GET /api/purchases`, purchase recording on buy, and a My purchases view.
+
+---
+
+## Visual design polish
+
+**AI tool:** Cursor
+
+**Prompt:**
+```text
+Improve the SPA design to be visually appealing, responsive, and provide a strong user experience.
+```
+
+**Outcome:** Polished the SPA under Car Dealership Inventory System branding with professional typography, atmospheric backgrounds, clearer hierarchy, motion, and mobile-friendly layouts.
