@@ -39,7 +39,7 @@ Passwords are bcrypt-hashed, JWT secrets are environment-configured, Admin regis
 
 ## CI/CD
 
-The GitHub Actions workflow uses `npm ci`, Prisma generation, migration deployment, seed data, backend build/tests/coverage/integration tests, frontend tests/lint/build, Playwright browser installation, E2E tests, and failure artifacts. Equivalent commands passed locally. The latest published workflow run (`40215099595`) reached GitHub but failed in the granular `Backend coverage` step before frontend validation; public job metadata does not expose the underlying log without repository-admin access.
+The GitHub Actions workflow uses `npm ci`, Prisma generation, migration deployment, seed data, backend build/tests/coverage/integration tests, frontend tests/lint/build, Playwright browser installation, E2E tests, and failure artifacts. Equivalent commands passed locally. The latest published workflow run ([`40216333901`](https://github.com/ProfOP/Car-Dealership-Inventory-System/actions/runs/40216333901)) passed all validation jobs after the SQLite concurrency test stabilization.
 
 ## Fresh-clone verification
 
@@ -55,5 +55,4 @@ The audit’s malformed-ID/search/E2E defects were found by failing tests, fixed
 
 ## Remaining limitations
 
-- The latest remote CI run failed in `Backend coverage`; local equivalents pass, but the detailed hosted log requires repository-admin access for diagnosis.
 - Prisma CLI transitive audit advisories remain pending a separately tested major-version upgrade.

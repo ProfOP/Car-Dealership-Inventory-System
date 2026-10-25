@@ -27,7 +27,7 @@ This report is maintained from commands actually executed during development on 
 | Live API/UI smoke check | Passed: Admin login/dashboard, populated inventory, INR display, make filter, and disabled out-of-stock purchase state |
 | Fresh Git checkout | Passed; clean install, setup, seed, build, tests, integration, and E2E verified |
 | Screenshot validation | Passed; all 5 README-referenced files exist |
-| CI workflow | Local equivalents passed; latest published GitHub run `40215099595` failed in Backend coverage; detailed hosted log unavailable without repository-admin access |
+| CI workflow | Passed; latest published GitHub run [`40216333901`](https://github.com/ProfOP/Car-Dealership-Inventory-System/actions/runs/40216333901) completed successfully |
 
 ## Coverage and limitations
 
