@@ -12,7 +12,7 @@ export default defineConfig({
     { name: 'mobile-chromium', use: { ...devices['Pixel 5'] } }
   ],
   webServer: [
-    { command: 'npm run dev', cwd: '../backend', url: 'http://127.0.0.1:8080/health', reuseExistingServer: !process.env.CI, timeout: 120000 },
+    { command: 'npm run prisma:seed && npm run dev', cwd: '../backend', url: 'http://127.0.0.1:8080/health', reuseExistingServer: !process.env.CI, timeout: 120000, env: { ...process.env, ADMIN_PASSWORD: 'change-me-in-development' } },
     { command: 'npm run dev -- --host 127.0.0.1', cwd: '.', url: 'http://127.0.0.1:5173', reuseExistingServer: !process.env.CI, timeout: 120000 }
   ]
 });

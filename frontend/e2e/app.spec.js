@@ -18,7 +18,7 @@ test('invalid login shows a user-facing error', async ({ page }) => {
 test('Admin can reach the real dashboard at desktop and mobile widths', async ({ page }) => {
   await page.goto('/login');
   await page.getByLabel('Email').fill('admin@dealership.com');
-  await page.getByLabel('Password').fill('admin123');
+  await page.getByLabel('Password').fill('change-me-in-development');
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/\/admin/);
   await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible({ timeout: 10000 });
