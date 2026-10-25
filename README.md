@@ -126,7 +126,7 @@ These screenshots were captured from the running independent application using i
 
 ### Landing Page
 
-
+![Landing Page](screenshots/landing.png)
 
 ### Vehicle Inventory
 
