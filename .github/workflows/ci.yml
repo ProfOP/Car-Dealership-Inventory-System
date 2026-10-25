@@ -1,0 +1,42 @@
+name: quality
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+      - name: Backend install and database setup
+        working-directory: backend
+        run: |
+          npm ci
+          cp .env.example .env
+          npx prisma generate
+          npx prisma migrate deploy
+          npm run prisma:seed
+      - name: Backend validation
+        working-directory: backend
+        run: |
+          npm run build
+          npm run test:coverage
+          npm run test:integration
+      - name: Frontend install and validation
+        working-directory: frontend
+        run: |
+          npm ci
+          npm test
+          npm run lint
+          npm run build

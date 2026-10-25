@@ -3,7 +3,7 @@ import { requireAuth, requireRole } from '../middleware/auth.js';
 import { quantitySchema, searchSchema, vehicleSchema } from '../validators.js';
 import { vehicleService } from '../services/vehicleService.js';
 const router = Router();
-function parseId(raw: string) { const id = Number(raw); if (!Number.isSafeInteger(id) || id < 1) throw Object.assign(new Error('Invalid vehicle identifier'), { status: 400 }); return id; }
+function parseId(raw: string | string[]) { const value = Array.isArray(raw) ? raw[0] : raw; const id = Number(value); if (!Number.isSafeInteger(id) || id < 1) throw Object.assign(new Error('Invalid vehicle identifier'), { status: 400 }); return id; }
 router.use(requireAuth);
 router.get('/', async (_req, res, next) => { try { res.json(await vehicleService.list()); } catch (e) { next(e); } });
 router.get('/search', async (req, res, next) => { try { res.json(await vehicleService.search(searchSchema.parse(req.query))); } catch (e) { next(e); } });

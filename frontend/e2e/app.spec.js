@@ -21,5 +21,5 @@ test('Admin can reach the real dashboard at desktop and mobile widths', async ({
   await page.getByLabel('Password').fill('admin123');
   await page.getByRole('button', { name: 'Sign in' }).click();
   await expect(page).toHaveURL(/\/admin/);
-  await expect(page.getByText(/Admin Dashboard/i).first()).toBeVisible({ timeout: 10000 });
+  await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible({ timeout: 10000 });
 });

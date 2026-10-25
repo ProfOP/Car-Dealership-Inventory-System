@@ -18,7 +18,7 @@ An independently runnable dealership inventory application. The React interface 
 
 ## Architecture and Structure
 
-The backend separates HTTP routes, middleware, validators, services, and Prisma repositories. The repository owns persistence and performs the purchase update inside a transaction with a quantity guard. The frontend is a preserved React/Vite application connected through an environment-configured Axios client.
+The backend separates HTTP routes, middleware, validators, services, and Prisma repositories. The repository owns persistence and performs the purchase update with an atomic conditional quantity guard inside a database transaction. The frontend is a preserved React/Vite application connected through an environment-configured Axios client.
 
 ```text
 car-dealership-inventory/
@@ -84,6 +84,10 @@ npm run dev
 ```powershell
 cd D:\car-dealership-inventory\backend; npm test
 cd D:\car-dealership-inventory\frontend; npm test
+cd D:\car-dealership-inventory\backend; npm run test:integration
+cd D:\car-dealership-inventory\backend; npm run test:coverage
+cd D:\car-dealership-inventory\frontend; npx playwright install chromium
+cd D:\car-dealership-inventory\frontend; npm run test:e2e
 cd D:\car-dealership-inventory\frontend; npm run build
 ```
 
@@ -95,6 +99,5 @@ Codex was used in this development session to inspect the reference repository, 
 
 ## Future Improvements
 
-- Add full database-backed integration tests for every endpoint and a dedicated test database lifecycle.
 - Add pagination, sorting, audit history, and a production PostgreSQL deployment profile.
-- Add browser end-to-end tests and fresh screenshots from the new project.
+- Add broader browser scenarios for purchase, restock, search, and out-of-stock UI states.

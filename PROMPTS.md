@@ -9,3 +9,7 @@ The full user-supplied master prompt is preserved in the attachment supplied wit
 ## Development Record Limitation
 
 The attachment path is retained as the source record because the complete interactive transcript is not available as a portable raw export. This document intentionally does not fabricate missing chat messages or claim that unexecuted red-green-refactor cycles were captured.
+
+## Final QA Prompt
+
+The second user-supplied prompt used for the audit is available at `C:\Users\yashp\.codex\attachments\b114b745-9186-4288-b145-d8b22eb9aa33\Pasted text.txt`. It requested final QA, database-backed integration and concurrency tests, Playwright E2E coverage, security review, coverage measurement, CI, compliance documentation, and an honest final audit. The complete raw Codex transcript remains unavailable for export.

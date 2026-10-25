@@ -10,4 +10,4 @@ if (existsSync(`${testDb}-journal`)) unlinkSync(`${testDb}-journal`);
 if (!existsSync(devDb)) throw new Error('Development database is required to bootstrap the isolated SQLite integration database. Run prisma migrate and seed first.');
 copyFileSync(devDb, testDb);
 const env = { ...process.env, DATABASE_URL: 'file:./integration.db', JWT_SECRET: 'integration-test-secret-please-change' };
-execFileSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['prisma', 'db', 'push', '--force-reset'], { cwd: backendRoot, env, stdio: 'inherit', shell: process.platform === 'win32' });
+execFileSync(process.platform === 'win32' ? 'npx.cmd' : 'npx', ['prisma', 'migrate', 'reset', '--force', '--skip-seed'], { cwd: backendRoot, env, stdio: 'inherit', shell: process.platform === 'win32' });
