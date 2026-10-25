@@ -33,7 +33,7 @@ car-dealership-inventory/
 
 ## Prerequisites and Installation
 
-Node.js 20+ and npm are recommended.
+Node.js 22.5+ and npm are required.
 
 ```powershell
 cd D:\car-dealership-inventory\backend
@@ -48,7 +48,7 @@ npm install
 
 The default Admin is configured by `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `backend/.env`. Change the development default before sharing the environment.
 
-`npm run prisma:setup` applies the checked-in schema for local development. On Windows it uses `prisma db push` because the installed Prisma version can fail while creating a new SQLite file with `migrate deploy`; the CI workflow on Linux applies the checked-in migration with `prisma migrate deploy`.
+`npm run prisma:setup` applies the checked-in schema for local development. On Windows it executes the checked-in SQLite migration directly because the installed Prisma version can fail while creating a new SQLite file with `migrate deploy`; the CI workflow on Linux applies the same migration with `prisma migrate deploy`.
 
 ## Environment Configuration
 
