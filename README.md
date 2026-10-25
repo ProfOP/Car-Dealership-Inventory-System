@@ -22,7 +22,8 @@ A full-stack car dealership inventory management system featuring vehicle browsi
 ### Backend
 
 ```powershell
-cd D:\car-dealership-inventory\backend
+git clone https://github.com/ProfOP/Car-Dealership-Inventory-System.git
+cd Car-Dealership-Inventory-System\backend
 npm install
 Copy-Item .env.example .env
 npm run prisma:setup
