@@ -126,7 +126,7 @@ These screenshots were captured from the running independent application using i
 
 ### Landing Page
 
-![Landing Page](screenshots/landing.png)
+https://github.com/ProfOP/Car-Dealership-Inventory-System/blob/main/screenshots/landing.png
 
 ### Vehicle Inventory
 
