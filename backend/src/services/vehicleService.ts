@@ -7,7 +7,9 @@ export const vehicleService = {
   list: () => vehicleRepository.list(),
   async search(filters: { make?: string; model?: string; category?: string; minPrice?: number; maxPrice?: number }) {
     if (filters.minPrice !== undefined && filters.maxPrice !== undefined && filters.minPrice > filters.maxPrice) throw Object.assign(new Error('minPrice cannot exceed maxPrice'), { status: 400 });
-    const contains = (value?: string) => value ? { contains: value, mode: 'insensitive' as const } : undefined;
+    // SQLite's LIKE operator is case-insensitive for ASCII text; avoiding Prisma's
+    // provider-specific `mode` keeps this query portable across local/test databases.
+    const contains = (value?: string) => value ? { contains: value } : undefined;
     return vehicleRepository.list({ make: contains(filters.make), model: contains(filters.model), category: contains(filters.category), price: { gte: filters.minPrice, lte: filters.maxPrice } });
   },
   async create(data: { make: string; model: string; category: string; price: number; quantity: number }) { return vehicleRepository.create(data); },
