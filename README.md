@@ -39,7 +39,7 @@ Node.js 20+ and npm are recommended.
 cd D:\car-dealership-inventory\backend
 npm install
 Copy-Item .env.example .env
-npx prisma migrate dev --name init
+npm run prisma:setup
 npm run prisma:seed
 
 cd ..\frontend
@@ -47,6 +47,8 @@ npm install
 ```
 
 The default Admin is configured by `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `backend/.env`. Change the development default before sharing the environment.
+
+`npm run prisma:setup` applies the checked-in schema for local development. On Windows it uses `prisma db push` because the installed Prisma version can fail while creating a new SQLite file with `migrate deploy`; the CI workflow on Linux applies the checked-in migration with `prisma migrate deploy`.
 
 ## Environment Configuration
 
@@ -92,6 +94,16 @@ cd D:\car-dealership-inventory\frontend; npm run build
 ```
 
 See [docs/test-report.md](docs/test-report.md) for the executed results. The included screenshots are reused reference-interface assets and are not presented as new runtime captures.
+
+## Screenshots
+
+These are genuine interface screenshots included with the project:
+
+![Landing page](Screenshots/landing.png)
+![Vehicle inventory](Screenshots/user.png)
+![Admin dashboard](Screenshots/admin.png)
+![Vehicle form](Screenshots/admin-2.png)
+![Authentication](Screenshots/auth.png)
 
 ## My AI Usage
 

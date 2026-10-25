@@ -11,6 +11,7 @@
     "test:coverage": "vitest run --coverage",
     "test:integration": "tsx tests/prepareIntegration.ts && vitest run --config vitest.integration.config.ts",
     "prisma:generate": "prisma generate",
+    "prisma:setup": "tsx prisma/setup.ts",
     "prisma:migrate": "prisma migrate dev --name init",
     "prisma:seed": "tsx prisma/seed.ts"
   },
