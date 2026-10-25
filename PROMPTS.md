@@ -2,7 +2,7 @@
 
 ## Project skeleton
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -17,7 +17,7 @@ Create backend and frontend scaffolds only — no business features yet.
 
 ## MongoDB connection
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -30,7 +30,7 @@ Connect the Express backend to MongoDB Atlas using MONGODB_URI and expose a heal
 
 ## Authentication API
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -43,7 +43,7 @@ Implement register and login with JWT using TDD. Do not add code comments.
 
 ## Vehicles and inventory API
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -56,7 +56,7 @@ Implement protected vehicle CRUD, search, purchase, and admin-only restock/delet
 
 ## Admin setup and role verification
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -72,7 +72,7 @@ Confirm UI and endpoints behave correctly per role.
 
 ## Frontend auth and dashboard
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -85,7 +85,7 @@ Build login/register with JWT storage, then the vehicle dashboard with search, p
 
 ## Purchase history
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
@@ -98,7 +98,7 @@ Add purchase history so each user can view their own purchases in the SPA.
 
 ## Visual design polish
 
-**AI tool:** Cursor
+**AI tool:** Codex
 
 **Prompt:**
 ```text
