@@ -47,7 +47,7 @@ A temporary checkout from the final dependency state was created without inherit
 
 ## Screenshot validation
 
-All five existing screenshot files under `Screenshots/` were present and referenced by README. They are genuine supplied interface assets, not newly generated application claims.
+Seven README screenshot files under `screenshots/` were freshly captured from the running independent application. They show the landing page, inventory, filtered search, login, registration, Admin dashboard, and Admin vehicle form without credentials or tokens.
 
 ## TDD and Git evidence
 

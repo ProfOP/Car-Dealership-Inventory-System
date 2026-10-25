@@ -1,41 +1,25 @@
 # Car Dealership Inventory Management System
 
-An independently runnable dealership inventory application. The React interface and visual language are preserved from the reference implementation, while the backend is a new TypeScript service with a layered architecture, persistent SQLite storage, JWT authentication, Zod validation, and atomic inventory updates.
+A full-stack car dealership inventory management system featuring vehicle browsing, advanced search, secure purchasing, stock tracking, and role-based administration.
 
-## Features
+## Tech Stack
 
-- Public landing page and responsive React UI.
-- User registration and login with bcrypt password hashing and JWTs.
-- User and Admin roles; public registration can only create User accounts.
-- Vehicle listing, combined make/model/category/price search, and admin CRUD.
-- Authenticated purchases and Admin-only restocking/deletion.
-- Atomic stock decrement prevents overselling under concurrent purchase requests.
-- Idempotent demo seed with 15 Indian-market sample vehicles across hatchback, sedan, SUV, and MPV categories, including out-of-stock records.
-- Vehicle prices are displayed with Indian Rupee grouping, for example `₹14,50,000`.
+| Area | Technologies |
+|---|---|
+| Backend | Node.js 22.5+, TypeScript 5.9, Express 5, Prisma 6, SQLite, JWT, bcryptjs, Zod |
+| Frontend | React 19, Vite 8, Tailwind CSS 4, React Router, Axios, Framer Motion, React Icons |
+| Testing | Vitest 4, Supertest, React Testing Library, Playwright 1.64 |
+| DevOps | Git and GitHub Actions CI for tests, linting, and builds |
 
-## Technology Stack
+## Getting Started
 
-- Frontend: React, Vite, Tailwind CSS, Framer Motion, Axios, Vitest, Testing Library.
-- Backend: Node.js, TypeScript, Express, Prisma ORM, SQLite, Zod, JWT, bcryptjs, Vitest, Supertest.
+### Prerequisites
 
-## Architecture and Structure
+- Node.js 22.5 or newer
+- npm
+- Git
 
-The backend separates HTTP routes, middleware, validators, services, and Prisma repositories. The repository owns persistence and performs the purchase update with an atomic conditional quantity guard inside a database transaction. The frontend is a preserved React/Vite application connected through an environment-configured Axios client.
-
-```text
-car-dealership-inventory/
-├── backend/
-│   ├── prisma/schema.prisma
-│   ├── src/{config,middleware,repositories,routes,services}/
-│   └── tests/
-├── frontend/src/{api,components,context,pages}/
-├── docs/test-report.md
-└── PROMPTS.md
-```
-
-## Prerequisites and Installation
-
-Node.js 22.5+ and npm are required.
+### Backend
 
 ```powershell
 cd D:\car-dealership-inventory\backend
@@ -43,77 +27,171 @@ npm install
 Copy-Item .env.example .env
 npm run prisma:setup
 npm run prisma:seed
-
-cd ..\frontend
-npm install
+npm run dev
 ```
 
-The default Admin is configured by `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `backend/.env`. Change the development default before sharing the environment.
+The API listens on `http://localhost:8080`. Configure `DATABASE_URL`, `JWT_SECRET`, `PORT`, `FRONTEND_ORIGIN`, `ADMIN_EMAIL`, and `ADMIN_PASSWORD` in `.env`. The `.env.example` file contains safe placeholders; do not commit `.env`.
 
-The seed preserves existing users and vehicles, adds only missing demo make/model pairs, and can be run repeatedly without duplicates or overwriting existing prices and stock.
+`prisma:setup` initializes the checked-in SQLite migration. The seed provisions the configured Admin account and adds 15 demonstration vehicles only when their make/model pair is missing. Existing vehicles, prices, quantities, users, and purchases are preserved. Running the seed repeatedly is safe.
 
-`npm run prisma:setup` applies the checked-in schema for local development. On Windows it executes the checked-in SQLite migration directly because the installed Prisma version can fail while creating a new SQLite file with `migrate deploy`; the CI workflow on Linux applies the same migration with `prisma migrate deploy`.
-
-## Environment Configuration
-
-Backend variables are documented in [backend/.env.example](backend/.env.example). Set `VITE_API_URL` in `frontend/.env` only when the API is not available at the default `/api` origin; for local development, use `VITE_API_URL=http://localhost:8080/api`.
-
-## Running
+### Frontend
 
 ```powershell
-# terminal 1
-cd D:\car-dealership-inventory\backend
-npm run dev
-
-# terminal 2
 cd D:\car-dealership-inventory\frontend
+npm install
 npm run dev
 ```
 
-## API Documentation
+Open [http://localhost:5173](http://localhost:5173). During local development, Vite proxies `/api` requests to the backend on port 8080. Set `VITE_API_URL` only when using a different API origin.
 
-| Method | Endpoint | Purpose | Auth | Role |
-|---|---|---|---|---|
-| POST | `/api/auth/register` | Register User | No | — |
-| POST | `/api/auth/login` | Issue JWT | No | — |
-| GET | `/api/vehicles` | List vehicles | JWT | User/Admin |
-| GET | `/api/vehicles/search` | Filter vehicles | JWT | User/Admin |
-| GET | `/api/vehicles/:id` | Get one vehicle | JWT | User/Admin |
-| POST | `/api/vehicles` | Create vehicle | JWT | Admin |
-| PUT | `/api/vehicles/:id` | Update vehicle | JWT | Admin |
-| DELETE | `/api/vehicles/:id` | Delete vehicle | JWT | Admin |
-| POST | `/api/vehicles/:id/purchase` | Decrement stock | JWT | User/Admin |
-| POST | `/api/vehicles/:id/restock` | Increment stock | JWT | Admin |
+## Features
 
-## Testing
+### Public Visitors
+
+- Animated landing page and feature showcase
+- Registration and login navigation
+
+### Authenticated Users
+
+- Browse 16 vehicles, including available and out-of-stock examples
+- Search by make and model
+- Filter by category and price range
+- View prices formatted in Indian Rupees, such as `₹14,50,000`
+- Purchase available vehicles with user-facing feedback
+- View updated stock levels
+
+### Admin Users
+
+- Dashboard with inventory totals, value, category breakdown, low-stock alerts, and recent vehicles
+- Add, update, and delete vehicles
+- Restock inventory
+- View the full inventory table and management actions
+
+### Security and Reliability
+
+- JWT authentication and bcrypt password hashing
+- Role-based authorization for Admin mutations
+- Zod request validation
+- Persistent SQLite storage
+- Atomic stock decrement to prevent negative inventory and overselling
+
+## API Endpoints
+
+| Method | Endpoint | Authentication | Description |
+|---|---|---|---|
+| POST | `/api/auth/register` | Public | Register a User account |
+| POST | `/api/auth/login` | Public | Authenticate and issue a JWT |
+| GET | `/api/vehicles` | User/Admin | List inventory |
+| GET | `/api/vehicles/search` | User/Admin | Search by make, model, category, minimum price, and maximum price |
+| GET | `/api/vehicles/:id` | User/Admin | Fetch one vehicle |
+| POST | `/api/vehicles` | Admin | Create a vehicle |
+| PUT | `/api/vehicles/:id` | Admin | Update a vehicle |
+| DELETE | `/api/vehicles/:id` | Admin | Delete a vehicle |
+| POST | `/api/vehicles/:id/purchase` | User/Admin | Purchase stock atomically |
+| POST | `/api/vehicles/:id/restock` | Admin | Increase vehicle stock |
+
+## Running Tests
+
+Run these commands from the project root as shown:
 
 ```powershell
-cd D:\car-dealership-inventory\backend; npm test
-cd D:\car-dealership-inventory\frontend; npm test
-cd D:\car-dealership-inventory\backend; npm run test:integration
-cd D:\car-dealership-inventory\backend; npm run test:coverage
-cd D:\car-dealership-inventory\frontend; npx playwright install chromium
-cd D:\car-dealership-inventory\frontend; npm run test:e2e
-cd D:\car-dealership-inventory\frontend; npm run build
+cd backend; npm test
+cd backend; npm run test:integration
+cd backend; npm run test:coverage
+cd backend; npm run build
+cd frontend; npm test
+cd frontend; npm run lint
+cd frontend; npm run build
+cd frontend; npx playwright install chromium
+cd frontend; npm run test:e2e
 ```
 
-See [docs/test-report.md](docs/test-report.md) for the executed results. The included screenshots are reused reference-interface assets and are not presented as new runtime captures.
+### Verified results
+
+| Suite | Passed | Failed |
+|---|---:|---:|
+| Backend unit/security | 15 | 0 |
+| Backend integration/concurrency | 11 | 0 |
+| Frontend | 45 | 0 |
+| Browser E2E | 8 | 0 |
+| Total | 79 | 0 |
+
+Measured backend coverage: **95.07% statements**, **86% branches**, **95% functions**, and **100% lines**.
+
+Detailed evidence is available in [docs/test-report.md](docs/test-report.md), [docs/final-audit.md](docs/final-audit.md), and [docs/requirements-compliance.md](docs/requirements-compliance.md).
 
 ## Screenshots
 
-These are genuine interface screenshots included with the project:
+These screenshots were captured from the running independent application using its demonstration inventory and local Admin account. They contain no passwords, tokens, or private data.
 
-![Landing page](Screenshots/landing.png)
-![Vehicle inventory](Screenshots/user.png)
-![Admin dashboard](Screenshots/admin.png)
-![Vehicle form](Screenshots/admin-2.png)
-![Authentication](Screenshots/auth.png)
+### Landing Page
+
+![Landing Page](screenshots/landing.png)
+
+### Vehicle Inventory
+
+![Vehicle Inventory](screenshots/inventory.png)
+
+### Search and Filtering
+
+![Vehicle Search and Filtering](screenshots/search.png)
+
+### Login Page
+
+![Login Page](screenshots/login.png)
+
+### Registration Page
+
+![Registration Page](screenshots/register.png)
+
+### Admin Dashboard
+
+![Admin Dashboard](screenshots/admin.png)
+
+### Admin Add/Edit Vehicle
+
+![Admin Vehicle Form](screenshots/admin-vehicle-form.png)
+
+## Project Structure
+
+```text
+Car-Dealership-Inventory-System/
+├── backend/
+│   ├── prisma/              # Schema, migration, setup, and seed data
+│   ├── src/                 # Express app, routes, services, repositories
+│   ├── tests/               # Unit, integration, and concurrency tests
+│   └── package.json
+├── frontend/
+│   ├── src/                 # React pages, components, API, and tests
+│   ├── e2e/                 # Playwright browser scenarios
+│   └── package.json
+├── docs/                    # Test report, audit, and compliance matrix
+├── screenshots/             # Genuine local application screenshots
+├── .github/workflows/       # GitHub Actions quality workflow
+├── README.md
+├── PROMPTS.md
+└── .gitignore
+```
 
 ## My AI Usage
 
-Codex was used in this development session to inspect the reference repository, scaffold the independent sibling project, implement the TypeScript/Express/Prisma backend, preserve and integrate the React frontend, write tests, run validation, and draft documentation. The master prompt and the limitation on exporting the complete chat transcript are recorded in [PROMPTS.md](PROMPTS.md). All claims in this README are based on files and commands actually inspected or executed during the session.
+### Tools Used
 
-## Future Improvements
+- OpenAI Codex
+- ChatGPT, where applicable
 
-- Add pagination, sorting, audit history, and a production PostgreSQL deployment profile.
-- Add broader browser scenarios for purchase, restock, search, and out-of-stock UI states.
+### How AI Was Used
+
+AI assistance supported requirements analysis, reference-repository inspection, independent backend architecture planning, Prisma schema and API implementation, authentication and authorization work, vehicle management, atomic inventory operations, frontend/API compatibility, unit and integration testing, concurrency testing, Playwright scenarios, debugging, INR formatting, seed idempotency, documentation, and CI configuration.
+
+Later fixes used verified test-first cycles where the available history supports them. AI-generated suggestions and code were reviewed, executed, and validated locally. Permitted frontend components and visual assets from the reference implementation were reused, while the backend was substantively reimplemented as a TypeScript/Express/Prisma service. The available history does not establish complete historical Red-Green-Refactor compliance for every feature.
+
+## Test Report
+
+See the full [test report](docs/test-report.md), [final audit](docs/final-audit.md), and [requirements compliance matrix](docs/requirements-compliance.md).
+
+The frontend audit is clean. The backend retains three high Prisma CLI/config transitive advisories in the Prisma 6 toolchain; upgrading to Prisma 7 is a separately tested breaking-change task. No application secrets, local databases, or generated build artifacts are tracked.
+
+## License and Attribution
+
+No standalone license file is currently included in this repository. Existing attribution and assignment context are preserved in the project documentation and history. Review third-party library licenses before redistribution.
