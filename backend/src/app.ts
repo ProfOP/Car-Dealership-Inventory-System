@@ -1,0 +1,16 @@
+import express from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import { env } from './config/env.js';
+import authRoutes from './routes/authRoutes.js';
+import vehicleRoutes from './routes/vehicleRoutes.js';
+import { errorHandler, notFoundHandler } from './middleware/errors.js';
+export const app = express();
+app.use(helmet());
+app.use(cors({ origin: env.FRONTEND_ORIGIN }));
+app.use(express.json({ limit: '100kb' }));
+app.get('/health', (_req, res) => res.json({ status: 'ok' }));
+app.use('/api/auth', authRoutes);
+app.use('/api/vehicles', vehicleRoutes);
+app.use(notFoundHandler);
+app.use(errorHandler);
